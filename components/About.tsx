@@ -95,7 +95,7 @@ export default function About() {
                   alt="Lara Lumbe – Maklerin und Hausverwalterin"
                   width={400}
                   height={500}
-                  className="w-full h-auto object-cover grayscale-[15%]"
+                  className="w-full h-auto object-cover grayscale"
                   priority={false}
                 />
               </div>

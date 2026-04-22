@@ -1,11 +1,59 @@
+"use client";
+
+import { useState, useRef } from "react";
+import { Calendar, Clock, MapPin, CheckCircle, Loader2, AlertCircle } from "lucide-react";
+
+// Hier trägt Lara die jeweils aktuellen Besichtigungstermine ein.
+// Pro Objekt ein Eintrag – einfach bei Bedarf ergänzen oder ändern.
+const termine = [
+  {
+    id: "diehlgasse-fr-24-04",
+    datum: "Freitag, 24. April 2026",
+    uhrzeit: "15:00 Uhr",
+    objekt: "Diehlgasse 47, 1050 Wien",
+    adresse: "Diehlgasse 47, 1050 Wien",
+  },
+];
+
+type Status = "idle" | "loading" | "success" | "error";
+
 export default function Appointments() {
-  // CALENDLY_URL: Lara trägt hier ihre Calendly-Seite ein, z.B.:
-  // "https://calendly.com/lara-lumbe/besichtigung"
-  const calendlyUrl = process.env.NEXT_PUBLIC_CALENDLY_URL ?? "";
+  const [selected, setSelected] = useState<string | null>(null);
+  const [status, setStatus] = useState<Status>("idle");
+  const formRef = useRef<HTMLFormElement>(null);
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (!selected) return;
+    setStatus("loading");
+
+    const termin = termine.find((t) => t.id === selected)!;
+    const fd = new FormData(e.currentTarget);
+
+    try {
+      const res = await fetch("/api/termin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: fd.get("name"),
+          telefon: fd.get("telefon"),
+          email: fd.get("email"),
+          objekt: termin.objekt,
+          termin: `${termin.datum} um ${termin.uhrzeit}`,
+        }),
+      });
+      if (!res.ok) throw new Error();
+      setStatus("success");
+      formRef.current?.reset();
+      setSelected(null);
+    } catch {
+      setStatus("error");
+    }
+  }
 
   return (
     <section id="termine" className="py-24 px-6 bg-warm-50">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-3xl mx-auto">
         <div className="text-center mb-12">
           <p className="font-sans text-xs text-warm-500 tracking-[0.2em] uppercase mb-3">
             Besichtigung vereinbaren
@@ -14,43 +62,118 @@ export default function Appointments() {
             Besichtigungstermine
           </h2>
           <div className="w-12 h-px bg-warm-300 mx-auto mt-4 mb-6" />
-          <p className="font-sans text-warm-600 text-sm leading-relaxed max-w-xl mx-auto">
-            Wählen Sie einfach einen freien Termin aus und buchen Sie direkt online.
-            Nach der Buchung erhalten Sie eine Bestätigung per E-Mail.
+          <p className="font-sans text-warm-600 text-sm leading-relaxed max-w-lg mx-auto">
+            Wählen Sie einen verfügbaren Termin aus und melden Sie sich direkt an.
+            Wir bestätigen Ihre Buchung per E-Mail oder Telefon.
           </p>
         </div>
 
-        {calendlyUrl ? (
-          <div className="border border-warm-200 overflow-hidden">
-            <iframe
-              src={calendlyUrl}
-              width="100%"
-              height="700"
-              frameBorder="0"
-              title="Besichtigungstermin buchen"
-            />
+        {status === "success" ? (
+          <div className="bg-warm-50 border border-warm-300 p-10 text-center">
+            <CheckCircle size={36} className="text-warm-600 mx-auto mb-4" />
+            <h3 className="font-serif text-2xl text-warm-800 mb-2">
+              Vielen Dank!
+            </h3>
+            <p className="font-sans text-warm-600 text-sm">
+              Ihre Anmeldung wurde übermittelt. Wir melden uns in Kürze bei Ihnen.
+            </p>
           </div>
         ) : (
-          <div className="border border-warm-200 bg-warm-100/50 p-12 text-center">
-            <p className="font-sans text-warm-500 text-sm mb-4">
-              Online-Terminbuchung wird in Kürze eingerichtet.
-            </p>
-            <p className="font-sans text-warm-600 text-sm">
-              Bitte nehmen Sie direkt Kontakt auf:
-            </p>
-            <a
-              href="tel:01503179750"
-              className="inline-block mt-4 font-serif text-warm-700 text-xl hover:text-warm-900"
-            >
-              01 503 179 750
-            </a>
-            <span className="block font-sans text-warm-400 text-xs mt-1">oder</span>
-            <a
-              href="mailto:lara@lumbe.at"
-              className="inline-block mt-2 font-sans text-warm-600 text-sm hover:text-warm-800"
-            >
-              lara@lumbe.at
-            </a>
+          <div className="space-y-6">
+            {/* Terminslots */}
+            <div className="space-y-3">
+              {termine.map((t) => (
+                <button
+                  key={t.id}
+                  type="button"
+                  onClick={() => setSelected(selected === t.id ? null : t.id)}
+                  className={`w-full text-left border px-6 py-5 transition-colors ${
+                    selected === t.id
+                      ? "border-warm-600 bg-warm-100"
+                      : "border-warm-200 bg-warm-50 hover:border-warm-400"
+                  }`}
+                >
+                  <div className="flex flex-wrap items-start gap-x-8 gap-y-2">
+                    <div className="flex items-center gap-2">
+                      <Calendar size={15} className="text-warm-500 shrink-0" />
+                      <span className="font-sans text-sm text-warm-800 font-medium">
+                        {t.datum}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Clock size={15} className="text-warm-500 shrink-0" />
+                      <span className="font-sans text-sm text-warm-700">{t.uhrzeit}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <MapPin size={15} className="text-warm-500 shrink-0" />
+                      <span className="font-sans text-sm text-warm-600">{t.adresse}</span>
+                    </div>
+                  </div>
+                  {selected === t.id && (
+                    <p className="font-sans text-xs text-warm-600 mt-3 border-t border-warm-200 pt-3">
+                      ✓ Termin ausgewählt – bitte Kontaktdaten ausfüllen und absenden.
+                    </p>
+                  )}
+                </button>
+              ))}
+            </div>
+
+            {/* Buchungsformular */}
+            {selected && (
+              <form
+                ref={formRef}
+                onSubmit={handleSubmit}
+                className="bg-warm-50 border border-warm-200 p-6 sm:p-8 space-y-4"
+              >
+                <p className="font-serif text-lg text-warm-700 mb-2">
+                  Ihre Kontaktdaten
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block font-sans text-xs text-warm-600 uppercase tracking-wider mb-1.5">
+                      Vor- und Nachname <span className="text-warm-500">*</span>
+                    </label>
+                    <input type="text" name="name" required placeholder="Maria Muster" />
+                  </div>
+                  <div>
+                    <label className="block font-sans text-xs text-warm-600 uppercase tracking-wider mb-1.5">
+                      Telefon <span className="text-warm-500">*</span>
+                    </label>
+                    <input type="tel" name="telefon" required placeholder="+43 660 …" />
+                  </div>
+                  <div className="sm:col-span-2">
+                    <label className="block font-sans text-xs text-warm-600 uppercase tracking-wider mb-1.5">
+                      E-Mail <span className="text-warm-500">*</span>
+                    </label>
+                    <input type="email" name="email" required placeholder="maria@beispiel.at" />
+                  </div>
+                </div>
+
+                {status === "error" && (
+                  <div className="flex items-center gap-2 text-red-600 bg-red-50 border border-red-200 px-4 py-3 rounded">
+                    <AlertCircle size={15} />
+                    <p className="font-sans text-sm">
+                      Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.
+                    </p>
+                  </div>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={status === "loading"}
+                  className="w-full bg-warm-700 text-warm-50 font-sans text-sm tracking-widest uppercase py-3.5 hover:bg-warm-800 transition-colors disabled:opacity-60 flex items-center justify-center gap-2"
+                >
+                  {status === "loading" ? (
+                    <>
+                      <Loader2 size={15} className="animate-spin" />
+                      Wird gesendet …
+                    </>
+                  ) : (
+                    "Termin verbindlich anmelden"
+                  )}
+                </button>
+              </form>
+            )}
           </div>
         )}
       </div>
