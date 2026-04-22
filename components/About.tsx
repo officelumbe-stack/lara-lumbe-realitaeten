@@ -91,7 +91,7 @@ export default function About() {
               <div className="absolute -top-3 -left-3 w-full h-full border border-warm-300" />
               <div className="relative overflow-hidden">
                 <Image
-                  src="/images/lara.jpg"
+                  src="/images/lara.jpeg"
                   alt="Lara Lumbe – Maklerin und Hausverwalterin"
                   width={400}
                   height={500}
