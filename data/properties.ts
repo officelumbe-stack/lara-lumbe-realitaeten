@@ -31,7 +31,7 @@ export const properties: Property[] = [
     available: "nach Vereinbarung",
     duration: "5 Jahre befristet",
     type: "Miete",
-    images: [],
+    images: ["/images/Inserat.jpeg"],
     description:
       "Exklusive Erstbezugswohnungen in einem zur Gänze neu errichteten Haus im charmanten Altbaustil im 5. Bezirk. Mehrere Einheiten verfügbar (ca. 32 m²). Die angeführten Betriebskosten sind Schätzwerte – die tatsächliche Höhe wird nach Ablauf des ersten Jahres festgesetzt.",
     willhabenUrl:
