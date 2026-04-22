@@ -14,7 +14,7 @@ export default function Hero() {
         </h1>
         <div className="w-16 h-px bg-warm-300 mx-auto mb-6" />
         <p className="font-sans text-warm-600 text-base sm:text-lg leading-relaxed mb-10 font-light max-w-xl mx-auto">
-          Mit über 8 Jahren Erfahrung in der Immobilienbranche unterstütze ich Sie gerne
+          Mit langjähriger Erfahrung in der Immobilienbranche unterstütze ich Sie gerne
           bei der Vermietung oder dem Verkauf Ihrer Immobilie. Als Hausverwalterin im
           eigenen Familienbetrieb sammle ich täglich umfassende Erfahrung, die mir bei
           der Vermarktung von Objekten aller Art zugute kommt.

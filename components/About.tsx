@@ -4,13 +4,13 @@ import { Award, Home, Shield } from "lucide-react";
 const highlights = [
   {
     icon: Award,
-    title: "8+ Jahre Erfahrung",
+    title: "Langjährige Erfahrung",
     text: "Immobilien, Hausverwaltung, Consulting und Projektentwicklung – ein breites Fundament, das jeder Vermittlung zugutekommt.",
   },
   {
     icon: Home,
     title: "Hausverwaltung & Makler",
-    text: "Als Hausverwalterin im eigenen Familienbetrieb kenne ich die rechtlichen, technischen und menschlichen Feinheiten, die normale Makler selten haben.",
+    text: "Als Hausverwalterin im eigenen Familienbetrieb kenne ich die rechtlichen, technischen und menschlichen Feinheiten rund um Wohnimmobilien aus einer ganz besonderen Perspektive.",
   },
   {
     icon: Shield,
@@ -44,7 +44,7 @@ export default function About() {
               <p>
                 Immobilien sind mehr als nur vier Wände – sie sind Lebensräume,
                 Heimat und Investition zugleich. Mit diesem Bewusstsein begleite
-                ich meine Klientinnen und Klienten seit über acht Jahren.
+                ich meine Klientinnen und Klienten seit vielen Jahren.
               </p>
               <p>
                 Hauptberuflich als Hausverwalterin tätig, kenne ich die
@@ -54,7 +54,7 @@ export default function About() {
                 Vermittlung mit ein – zum Vorteil aller Beteiligten.
               </p>
               <p>
-                Darüber hinaus war ich in den letzten acht Jahren auch im
+                Darüber hinaus war ich viele Jahre auch im
                 Consulting- und Projektentwicklungsbereich tätig – eine
                 Erfahrung, die mir bei der strategischen Vermarktung und
                 Entwicklung von Immobilienprojekten jeder Größenordnung
