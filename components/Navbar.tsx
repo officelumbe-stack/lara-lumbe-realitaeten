@@ -8,6 +8,7 @@ const navLinks = [
   { label: "Angebote", href: "#angebote" },
   { label: "Über mich", href: "#ueber-mich" },
   { label: "Termine", href: "#termine" },
+  { label: "Tätigwerden", href: "#vorzeitiges-taetigwerden" },
   { label: "Kontakt", href: "#kontakt" },
 ];
 
