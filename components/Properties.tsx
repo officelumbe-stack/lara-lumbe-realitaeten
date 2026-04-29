@@ -31,19 +31,30 @@ export default function Properties() {
                 key={p.id}
                 className="bg-white border border-warm-200 hover:border-warm-400 transition-colors group"
               >
-                {p.images[0] ? (
-                  <div className="aspect-[4/3] overflow-hidden bg-warm-100">
+                {/* Bild + Badge */}
+                <div className="relative aspect-[4/3] overflow-hidden bg-warm-100">
+                  {p.images[0] ? (
                     <img
                       src={p.images[0]}
                       alt={p.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
-                  </div>
-                ) : (
-                  <div className="aspect-[4/3] bg-warm-100 flex items-center justify-center">
-                    <span className="font-serif text-warm-300 text-2xl">LL</span>
-                  </div>
-                )}
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <span className="font-serif text-warm-300 text-2xl">LL</span>
+                    </div>
+                  )}
+                  <span
+                    className={`absolute top-3 left-3 font-sans text-xs tracking-widest uppercase px-2.5 py-1 ${
+                      p.type === "Kauf"
+                        ? "bg-warm-800 text-warm-50"
+                        : "bg-warm-600 text-warm-50"
+                    }`}
+                  >
+                    {p.type === "Kauf" ? "Kaufobjekt" : "Miete"}
+                  </span>
+                </div>
+
                 <div className="p-6">
                   <h3 className="font-serif text-xl text-warm-800 mb-2 leading-snug">
                     {p.title}
@@ -55,17 +66,36 @@ export default function Properties() {
                   <div className="flex items-center gap-1.5 text-warm-500 mb-4">
                     <Maximize2 size={13} />
                     <span className="font-sans text-xs">
-                      {p.size} m² · {p.rooms} Zimmer · {p.type}
+                      {p.size} m² · {p.rooms} Zimmer
                     </span>
                   </div>
+
                   <div className="border-t border-warm-100 pt-4 flex items-end justify-between">
                     <div>
-                      <p className="font-sans text-xs text-warm-400 uppercase tracking-wide">
-                        Gesamtmiete
-                      </p>
-                      <p className="font-serif text-2xl text-warm-700">
-                        € {p.rentTotal.toLocaleString("de-AT", { minimumFractionDigits: 2 })}
-                      </p>
+                      {p.type === "Kauf" ? (
+                        <>
+                          <p className="font-sans text-xs text-warm-400 uppercase tracking-wide">
+                            Kaufpreis
+                          </p>
+                          <p className="font-serif text-2xl text-warm-700">
+                            € {p.purchasePrice?.toLocaleString("de-AT")}
+                          </p>
+                          {p.monthlyRunningCosts && (
+                            <p className="font-sans text-xs text-warm-400 mt-0.5">
+                              BK ca. € {p.monthlyRunningCosts}/Monat
+                            </p>
+                          )}
+                        </>
+                      ) : (
+                        <>
+                          <p className="font-sans text-xs text-warm-400 uppercase tracking-wide">
+                            Gesamtmiete
+                          </p>
+                          <p className="font-serif text-2xl text-warm-700">
+                            € {p.rentTotal?.toLocaleString("de-AT", { minimumFractionDigits: 2 })}
+                          </p>
+                        </>
+                      )}
                     </div>
                     {p.willhabenUrl && (
                       <a
@@ -78,12 +108,13 @@ export default function Properties() {
                       </a>
                     )}
                   </div>
+
                   <div className="mt-4">
                     <a
-                      href="#kontakt"
+                      href="#termine"
                       className="block w-full text-center bg-warm-700 text-warm-50 font-sans text-xs tracking-widest uppercase py-2.5 hover:bg-warm-800 transition-colors"
                     >
-                      Interesse bekunden
+                      Besichtigung vereinbaren
                     </a>
                   </div>
                 </div>
