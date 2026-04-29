@@ -152,9 +152,9 @@ export default function MietanbotForm() {
                 </label>
                 <select name="objekt" required>
                   <option value="">Bitte wählen …</option>
-                  {properties.map((p) => (
+                  {properties.filter((p) => p.type === "Miete").map((p) => (
                     <option key={p.id} value={p.address}>
-                      {p.address} – € {p.rentTotal.toFixed(2)}/Monat
+                      {p.address} – € {p.rentTotal?.toFixed(2)}/Monat
                     </option>
                   ))}
                 </select>
