@@ -5,15 +5,7 @@ import { Calendar, Clock, MapPin, CheckCircle, Loader2, AlertCircle } from "luci
 
 // Hier trägt Lara die jeweils aktuellen Besichtigungstermine ein.
 // Pro Objekt ein Eintrag – einfach bei Bedarf ergänzen oder ändern.
-const termine = [
-  {
-    id: "diehlgasse-fr-24-04",
-    datum: "Freitag, 24. April 2026",
-    uhrzeit: "15:00 Uhr",
-    objekt: "Diehlgasse 47, 1050 Wien",
-    adresse: "Diehlgasse 47, 1050 Wien",
-  },
-];
+const termine: { id: string; datum: string; uhrzeit: string; objekt: string; adresse: string }[] = [];
 
 type Status = "idle" | "loading" | "success" | "error";
 
@@ -80,6 +72,22 @@ export default function Appointments() {
           </div>
         ) : (
           <div className="space-y-6">
+            {/* Keine Termine */}
+            {termine.length === 0 && (
+              <div className="text-center py-12 border border-warm-200 bg-warm-100/40">
+                <p className="font-serif text-lg text-warm-700 mb-2">
+                  Derzeit sind keine Termine eingetragen.
+                </p>
+                <p className="font-sans text-sm text-warm-500">
+                  Bitte nehmen Sie direkt{" "}
+                  <a href="#kontakt" className="underline underline-offset-2 hover:text-warm-700">
+                    Kontakt
+                  </a>{" "}
+                  auf – wir vereinbaren gerne einen individuellen Besichtigungstermin.
+                </p>
+              </div>
+            )}
+
             {/* Terminslots */}
             <div className="space-y-3">
               {termine.map((t) => (
