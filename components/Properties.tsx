@@ -48,10 +48,12 @@ export default function Properties() {
                     className={`absolute top-3 left-3 font-sans text-xs tracking-widest uppercase px-2.5 py-1 ${
                       p.type === "Kauf"
                         ? "bg-warm-800 text-warm-50"
+                        : p.type === "Gewerbe"
+                        ? "bg-warm-900 text-warm-100"
                         : "bg-warm-600 text-warm-50"
                     }`}
                   >
-                    {p.type === "Kauf" ? "Kaufobjekt" : "Miete"}
+                    {p.type === "Kauf" ? "Kaufobjekt" : p.type === "Gewerbe" ? "Büro / Gewerbe" : "Miete"}
                   </span>
                 </div>
 
@@ -85,6 +87,18 @@ export default function Properties() {
                               BK ca. € {p.monthlyRunningCosts}/Monat
                             </p>
                           )}
+                        </>
+                      ) : p.type === "Gewerbe" ? (
+                        <>
+                          <p className="font-sans text-xs text-warm-400 uppercase tracking-wide">
+                            Gesamtmiete (exkl. MwSt.)
+                          </p>
+                          <p className="font-serif text-2xl text-warm-700">
+                            € {p.rentTotal?.toLocaleString("de-AT", { minimumFractionDigits: 2 })}
+                          </p>
+                          <p className="font-sans text-xs text-warm-400 mt-0.5">
+                            Nettomiete € {p.rentNet?.toLocaleString("de-AT", { minimumFractionDigits: 2 })}
+                          </p>
                         </>
                       ) : (
                         <>

@@ -5,8 +5,8 @@ export interface Property {
   district: string;
   size: number;
   rooms: number;
-  type: "Miete" | "Kauf";
-  // Miete
+  type: "Miete" | "Kauf" | "Gewerbe";
+  // Miete / Gewerbe
   rentTotal?: number;
   rentNet?: number;
   deposit?: number;
@@ -66,6 +66,37 @@ export const properties: Property[] = [
       "Einbauküche",
       "Sofort bezugsfrei",
       "Baujahr ca. 1910",
+    ],
+  },
+  {
+    id: "operngasse-4-1010",
+    title: "Repräsentative Büroetage in Wiener Innenstadt-Palais",
+    address: "Operngasse 4, 1010 Wien",
+    district: "1010 Wien – Innere Stadt",
+    size: 379.87,
+    rooms: 10,
+    type: "Gewerbe",
+    rentTotal: 9989.41,
+    rentNet: 8737.01,
+    deposit: 39957.64,
+    duration: "unbefristet",
+    available: "ab 01.10.2026",
+    images: [],
+    description:
+      "Außergewöhnliche Büroetage im 2. OG eines repräsentativen Wiener Palais – unmittelbar neben der Staatsoper. Hohe Räume, Stuckdetails, original Wiener Tafelparkett, eindrucksvolle Flügeltüren und direkter Blick auf die Wiener Staatsoper. Ca. 379,87 m² Nutzfläche, bequem mit Aufzug erreichbar. Ab 1. Oktober 2026 verfügbar.",
+    willhabenUrl:
+      "https://www.willhaben.at/iad/immobilien/d/gewerbeimmobilien-mieten/wien/wien-1010-innere-stadt/repraesentative-bueroetage-in-wiener-innenstadt-palais-blick-auf-staatsoper-1648419378/",
+    features: [
+      "Blick auf Staatsoper",
+      "Wiener Tafelparkett",
+      "Stuckdetails",
+      "Flügeltüren",
+      "Lift",
+      "Einbauküche",
+      "Innenhof",
+      "Altbau-Palais",
+      "2. Obergeschoss",
+      "ab Oktober 2026",
     ],
   },
 ];
