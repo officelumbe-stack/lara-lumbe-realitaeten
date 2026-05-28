@@ -81,7 +81,7 @@ export const properties: Property[] = [
     deposit: 39957.64,
     duration: "unbefristet",
     available: "ab 01.10.2026",
-    images: [],
+    images: ["/images/Inserat Operngasse.jpg"],
     description:
       "Außergewöhnliche Büroetage im 2. OG eines repräsentativen Wiener Palais – unmittelbar neben der Staatsoper. Hohe Räume, Stuckdetails, original Wiener Tafelparkett, eindrucksvolle Flügeltüren und direkter Blick auf die Wiener Staatsoper. Ca. 379,87 m² Nutzfläche, bequem mit Aufzug erreichbar. Ab 1. Oktober 2026 verfügbar.",
     willhabenUrl:
