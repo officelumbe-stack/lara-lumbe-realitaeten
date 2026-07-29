@@ -56,7 +56,7 @@ export const properties: Property[] = [
     images: ["/images/Inserat Silbergasse.jpg"],
     description:
       "Großzügige 4-Zimmer-Altbauwohnung in einem gepflegten Zinshaus aus ca. 1910 – saniert und sofort bezugsfrei. Hohe Räume, Fischgrätparkett, Stuckdecken, eindrucksvolle Flügeltüren, westseitiger Balkon mit Schmiedeeisengeländer und grüner Gemeinschaftsgarten im Innenhof. 1. Obergeschoss mit Lift.",
-    willhabenUrl: "https://www.willhaben.at/iad/object?adId=1538797982",
+    willhabenUrl: "https://www.willhaben.at/iad/immobilien/d/eigentumswohnung/wien/wien-1190-doebling/klassischer-altbaucharme-stuckdecken-westbalkon-ruhiger-gemeinschaftsgarten-1538797982/",
     features: [
       "Balkon westseitig",
       "Lift vorhanden",
