@@ -53,7 +53,7 @@ export const properties: Property[] = [
     purchasePrice: 373500,
     monthlyRunningCosts: 359.02,
     available: "ab sofort",
-    images: ["/images/Inserat Klimschgasse.jpg"],
+    images: ["/images/Klimschgasse.png"],
     description:
       "3-Zimmer-Altbauwohnung im 5. Stock eines ruhigen Wohnhauses in einem geschlossenen Wohnkarree im 3. Bezirk – ohne Durchzugsverkehr, mit breiten Gehsteigen und alten Bäumen. Nachmittagssonne in den beiden Zimmern zur Klimschgasse, außergewöhnlich großzügiger begehbarer Schrankraum (8,18 m²). Bad kürzlich saniert (ebenerdige Dusche, Waschtisch, separates WC), Küche mit allen Geräten. Eines der Zimmer mit Fensterfront bis zum Boden. Übrige Räume sanierungsbedürftig. Lift vorhanden, Kellerabteil inklusive.",
     willhabenUrl:
